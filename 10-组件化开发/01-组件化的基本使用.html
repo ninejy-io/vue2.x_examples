@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 3.使用组件 -->
+      <!-- <my-cpn></my-cpn> -->
+      <cpn></cpn>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      // 1.创建组件构造器
+      const cpnConstructor = Vue.extend({
+        template: `
+          <div>
+            <h1>我是标题, 哈哈哈哈哈</h1>
+            <h2>我是内容, 呵呵呵呵呵呵</h2>
+            <h2>我是内容, 啊啊啊啊啊啊啊</h2>
+          </div>
+        `
+      });
+      // 2.注册组件, 并且定义标签的名称
+      // 全局注册
+      // Vue.component('my-cpn', cpnConstructor);
+
+      const app = new Vue({
+        el: '#app',
+        data: {
+        },
+        components: {
+          // 局部注册
+          cpn: cpnConstructor
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- props 驼峰要转换为小写中间加 '-' -->
+      <cpn :cmessage="message" :cmovies="movies"></cpn>
+    </div>
+
+    <template id="cpn">
+      <div>
+        <h1>{{cmessage}}</h1>
+        <p v-for="(item, index) in cmovies">{{index}} --- {{item}}</p>
+      </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+      Vue.component('cpn', {
+        template: '#cpn',
+        props: {
+          cmessage: {
+            type: String,
+            default: '哈哈哈',
+            required: trrue
+          },
+          cmovies: {
+            type: Array,
+            default() {
+              return []
+            }
+          }
+        }
+      })
+
+      const app = new Vue({
+        el: '#app',
+        data: {
+          message: '你好啊',
+          movies: ['大话西游', '肖申克的救赎', '喜剧之王']
+        },
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app">
+      <ul>
+        <li v-for="item in names">{{item}}</li>
+      </ul>
+
+      <ul>
+        <li v-for="(item, index) in names" :key="item">{{index+1}} --- {{item}}</li>
+      </ul>
+
+      <ul>
+        <li v-for="item in obj">{{item}}</li>
+      </ul>
+
+      <ul>
+        <li v-for="(value, key) in obj">{{key}} --- {{value}}</li>
+      </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          names: ['python', 'java', 'golang', 'javascript'],
+          obj: {
+            name: 'james',
+            age: 35,
+            height: 2.03
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

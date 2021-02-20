@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 1.直接拼接 -->
+      <h2>{{firstName}}  {{lastName}}</h2>
+
+      <!-- 2.通过定义methods 多次调用,多次执行-->
+      <!-- <h2>{{getFullName()}}</h2>
+      <h2>{{getFullName()}}</h2>
+      <h2>{{getFullName()}}</h2>
+      <h2>{{getFullName()}}</h2> -->
+
+      <!-- 3.通过computed 多次调用,只执行一次-->
+      <h2>{{fullName}}</h2>
+      <h2>{{fullName}}</h2>
+      <h2>{{fullName}}</h2>
+      <h2>{{fullName}}</h2>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          firstName: 'Kobe',
+          lastName: 'Bryant'
+        },
+        methods: {
+          getFullName: function() {
+            console.log('getFullName');
+            return this.firstName + ' ' + this.lastName
+          }
+        },
+        computed: {
+          fullName: function() {
+            console.log('fullName');
+            return this.firstName + ' ' + this.lastName
+          }
+        },
+      })
+    </script>
+  </body>
+</html>

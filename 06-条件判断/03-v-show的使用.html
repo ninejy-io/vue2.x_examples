@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-if 为 false 时, 压根不会有对应的元素在dom中 -->
+      <div v-if="isShow">{{message}}</div>
+
+      <!-- v-show 为 false 时, 仅仅是将元素的display属性设置为none -->
+      <div v-show="isShow">{{message}}</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          message: '你好啊',
+          isShow: true
+        },
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      th td {
+        border: 1px solid grey;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div v-if="books.length">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>书籍名称</th>
+              <th>出版日期</th>
+              <th>价格</th>
+              <th>购买数量</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in books">
+              <td>{{item.id}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.date}}</td>
+              <td>{{item.price | showPrice}}</td>
+              <td>
+                <button @click="decrement(index)" :disabled="item.count <= 1">-</button>
+                {{item.count}}
+                <button @click="increment(index)">+</button>
+              </td>
+              <td><button @click="removeHandler(index)">移除</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <h2>总价格: {{totalPrice | showPrice}}</h2>
+      </div>
+      <h2 v-else>购物车为空</h2>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+          books: [
+            {"id": 1, "name": "深入理解计算机操作系统", "date": "2008-10-21", "price": 88, "count": 1},
+            {"id": 2, "name": "毛泽东选集", "date": "2005-08-16", "price": 66, "count": 1},
+            {"id": 3, "name": "社会认知心理学", "date": "2007-11-12", "price": 78, "count": 1},
+            {"id": 4, "name": "TCP/IP详解", "date": "2003-03-23", "price": 102, "count": 1}
+          ]
+        },
+        computed: {
+          totalPrice() {
+            // let totalPrice = 0;
+            // for (let i=0; i<this.books.length; i++) {
+            //   totalPrice += this.books[i].price * this.books[i].count
+            // }
+
+            // for (let i in this.books) {
+            //   totalPrice += this.books[i].price * this.books[i].count
+            // }
+
+            // for (let item of this.books) {
+            //   totalPrice += item.price * item.count
+            // }
+            // return totalPrice
+
+            return this.books.reduce((pre, book) => pre + book.price * book.count, 0);
+
+            // return this.books.reduce(function(pre, book) {
+            //   return pre + book.price * book.count
+            // }, 0)
+          }
+        },
+        methods: {
+          increment(index) {
+            this.books[index].count++;
+          },
+          decrement(index) {
+            this.books[index].count--;
+          },
+          removeHandler(index) {
+            this.books.splice(index, 1);
+          }
+        },
+        filters: {
+          showPrice(price) {
+            return '¥' + price.toFixed(2);
+          }
+        }
+      })
+
+      // filter/map/reduce
+      // filter中的回调函数有一个要求, 必须返回一个布尔值
+      // true: 当返回true时, 函数内部会自动将这次回调的n加入到新的数组中
+      // false: 当返回false时, 函数内部会过滤掉这次的n
+      const nums = [10, 40, 102, 222, 50, 60, 230]
+
+      let total = nums.filter(n => n < 100).map(n => n * 2).reduce((pre, n) => pre + n, 0)
+      console.log(total);
+
+      // let total = nums.filter(function(n) {
+      //   return n < 100
+      // }).map(function(n) {
+      //   return n * 2
+      // }).reduce(function(preValue, n) {
+      //   return preValue + n
+      // }, 0)
+      // console.log(total);
+
+      // // 1.filter函数使用
+      // // 10, 40, 50, 60
+      // let newNums = nums.filter(function(n) {
+      //   return n < 100
+      // })
+      // // console.log(newNums);
+
+      // // 2.map函数使用
+      // // 20, 80, 100, 120
+      // let new2Nums = newNums.map(function(n) {
+      //   return n * 2
+      // })
+      // // console.log(new2Nums);
+
+      // // 3.reduce函数使用
+      // // reduce作用: 对数组中所有内容进行汇总
+      // let total = new2Nums.reduce(function(preValue, n) {
+      //   return preValue + n
+      // }, 0)
+      // console.log(total);
+
+      // // 1. 需求: 取出所有小于100的数字
+      // let newNums = []
+      // for (let n of nums) {
+      //   if (n < 100) {
+      //     newNums.push(n)
+      //   }
+      // }
+      // // 2.需求: 将所有小于100的数组进行转化: 全部*2
+      // let new2Nums = []
+      // for (let n of newNums) {
+      //   new2Nums.push(n * 2)
+      // }
+      // console.log(new2Nums);
+      // // 3.需求: 将所有new2Nums数字相加,得到最终的结果
+      // let total = 0
+      // for (let n of new2Nums) {
+      //   total += n
+      // }
+      // console.log(total);
+    </script>
+  </body>
+</html>

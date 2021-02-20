@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app">
+      <cpn></cpn>
+      <cpn></cpn>
+      <cpn></cpn>
+    </div>
+
+    <template id="cpn">
+      <div>
+        <!-- 组件只能访问组件内部的数据 -->
+        <h2>计数器: {{counter}}</h2>
+        <button @click="increment">+</button>
+        <button @click="decrement">-</button>
+      </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+      // 1.注册组件
+      Vue.component('cpn', {
+        template: '#cpn',
+        data() {
+          return {
+            counter: 0
+          }
+        },
+        methods: {
+          increment() {
+            this.counter++
+          },
+          decrement() {
+            this.counter--
+          }
+        },
+      })
+
+      const app = new Vue({
+        el: '#app',
+        data: {
+          counter: 9999
+        },
+      })
+    </script>
+
+    <script>
+      let obj = {
+        name: 'aaa',
+        age: 18
+      }
+
+      function abc() {
+        return obj;  // 对象定义在函数外部, 每次返回的都是外部定义的那个对象
+
+        // 函数每次返回一个新的对象
+        //     {
+        //   name: 'aaa',
+        //   age: 18
+        // }
+      }
+
+      let obj1 = abc();
+      let obj2 = abc();
+      let obj3 = abc();
+      obj1.name = 'bbb';
+      console.log(obj1);
+      console.log(obj2);
+      console.log(obj3);
+    </script>
+  </body>
+</html>

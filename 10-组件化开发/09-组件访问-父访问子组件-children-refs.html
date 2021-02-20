@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app">
+      <cpn></cpn>
+      <cpn></cpn>
+      <cpn ref="aaa"></cpn>
+      <button @click="btnClick">按钮</button>
+    </div>
+
+    <template id="cpn">
+      <div>我是子组件</div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+        },
+        methods: {
+          btnClick() {
+            // 通过 $children
+            // console.log('btnClick');
+            // console.log(this.$children);
+            // this.$children[0].showMessage();
+            // console.log(this.$children[0].name);
+
+            // 通过 $refs, 需要在调用组件时绑定 ref 属性
+            console.log(this.$refs.aaa.name);
+          }
+        },
+        components: {
+          cpn: {
+            template: '#cpn',
+            data() {
+              return {
+                name: '子组件属性 name'
+              }
+            },
+            methods: {
+              showMessage() {
+                console.log('子组件的 showMessage 方法被执行')
+              }
+            },
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app">
+      <cpn1></cpn1>
+      <cpn2></cpn2>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      Vue.component('cpn1', {
+        template: `
+          <div>
+            <h1>标题1</h1>
+            <h2>内容111111111111111111</h2>
+          </div>
+        `
+      })
+
+      const app = new Vue({
+        el: '#app',
+        data: {
+        },
+        components: {
+          'cpn2': {
+            template: `
+            <div>
+              <h1>标题2</h1>
+              <h2>内容2222222222222222222222</h2>
+            </div>
+            `
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+  <div id="app">
+  </div>
+
+  <script>
+    // 箭头函数: 也是一种定义函数的方式
+    // 1.定义函数的方式
+    const aaa = function() {
+      console.log('aaa')
+    }
+
+    // 2.对象字面量中定义函数
+    const obj = {
+      bbb() {
+        console.log('bbb')
+      }
+    }
+
+    // 3.ES6中的箭头函数
+    const ccc = () => {
+      console.log('ccc')
+    }
+
+    // ************************ //
+    // 1.参数问题
+    // 1.1放入两个参数
+    const sum = (num1, num2) => {
+      return num1 +num2
+    }
+
+    // 1.2放入一个参数
+    const power = num => {
+      return num * num
+    }
+
+    // ************************ //
+    // 2.
+    // 2.1代码块中有多行代码
+    const ddd = () => {
+      console.log('line 1111')
+      console.log('line 2222222')
+    }
+
+    // 2.2代码块中只有一行代码
+    const mul = (num1, num2) => num1 * num2
+    console.log(mul(20, 30))
+
+    const demo = () => console.log('Hello demo')
+    console.log(demo())
+
+
+    // ************************ //
+    // 箭头函数中 this 
+    // 箭头函数什么时候使用? 一般在函数作为参数被传入另一个函数的时候使用
+    // setTimeout(function() {
+    //   console.log(this)  // window
+    // }, 1000)
+
+    // setTimeout(() => {
+    //   console.log(this)  // window
+    // }, 1000)
+
+    // 问题: 箭头函数中的this是怎么查找的?
+    // 答案: 向外层作用域中, 一层层查找this, 直到有this
+    const obj2 = {
+      aaa() {
+        setTimeout(function() {
+          console.log(this)  // window
+        })
+
+        setTimeout(() => {
+          console.log(this)  // obj2对象
+        })
+      }
+    }
+    obj2.aaa()
+
+    // 
+    const obj3 = {
+      aaa() {
+        setTimeout(function() {
+          setTimeout(function() {
+            console.log(this)  // window
+          })
+
+          setTimeout(() => {
+            console.log(this)  // window
+          })
+        })
+
+        setTimeout(() => {
+          setTimeout(function() {
+            console.log(this)  // window
+          })
+
+          setTimeout(() => {
+            console.log(this)  // obj2对象
+          })
+        })
+      }
+    }
+    obj3.aaa()
+</script>
+  </body>
+</html>

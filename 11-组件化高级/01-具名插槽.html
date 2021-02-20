@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  </head>
+  <body>
+    <div id="app">
+      <cpn><p slot="left">返回</p></cpn>
+      <cpn></cpn>
+      <cpn>
+        <div>哈哈哈哈哈</div>
+        <i>aaaa</i>
+        <p>AAAAAAAAAAAAAAA</p>
+      </cpn>
+    </div>
+
+    <template id="cpn">
+      <div>
+        <h2>我是组件</h2>
+        <slot name="left"><span>左边</span></slot>
+        <slot name="ceter"><span>中间</span></slot>
+        <slot name="right"><span>右边</span></slot>
+        <slot></slot>
+      </div>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const app = new Vue({
+        el: '#app',
+        data: {
+        },
+        components: {
+          cpn: {
+            template: '#cpn',
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
